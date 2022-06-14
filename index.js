@@ -1,6 +1,8 @@
 const express = require("express");
 const products = require("./data/products");
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 app.use(cors());
