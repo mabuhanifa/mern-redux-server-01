@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name: name,
     email: email,
-    password: password
+    password: password,
   });
 
   if (user) {
@@ -48,10 +48,8 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       token: generateToken(user._id),
-
     });
-  }
-  else{
+  } else {
     res.status(400);
     throw new Error("Invalid user data");
   }

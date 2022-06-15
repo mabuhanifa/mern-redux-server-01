@@ -37,7 +37,7 @@ const destroyData = async () => {
     await Order.deleteMany();
     await Product.deleteMany();
     await User.deleteMany();
-    
+
     console.log("Data Destroyed Successfully");
     process.exit();
   } catch (error) {
