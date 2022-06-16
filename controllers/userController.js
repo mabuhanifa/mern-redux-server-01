@@ -7,7 +7,8 @@ import generateToken from "../utils/generateToken.js";
 // @access Public
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email: email });
+
+  const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -19,7 +20,7 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error("Invalid credentials");
+    throw new Error("Invalid email or password");
   }
 });
 
@@ -28,7 +29,8 @@ const authUser = asyncHandler(async (req, res) => {
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-  const userExists = await User.findOne({ email: email });
+
+  const userExists = await User.findOne({ email });
 
   if (userExists) {
     res.status(400);
@@ -36,9 +38,9 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   const user = await User.create({
-    name: name,
-    email: email,
-    password: password,
+    name,
+    email,
+    password,
   });
 
   if (user) {
@@ -60,6 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+
   if (user) {
     res.json({
       _id: user._id,
@@ -69,7 +72,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("Invalid credentials");
+    throw new Error("User not found");
   }
 });
 export { authUser, getUserProfile, registerUser };
