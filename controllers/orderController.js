@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
 
 /*
- * This is the  for posting new orders.
+  This is the  for posting new orders.
  */
 
 const addOrderItems = asyncHandler(async (req, res) => {
@@ -36,5 +36,23 @@ const addOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems };
+/*
+# get order by id
+
+*/
+const getOrderById = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id).populate(
+    "user",
+    "name email"
+  );
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+export { addOrderItems, getProductById };
 
