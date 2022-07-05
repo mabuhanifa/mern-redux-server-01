@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server-side/index.js",
     "start-dev": "nodemon server-side/index.js",
     "data:import": "node seeder.js",
     "data:destroy": "node seeder.js -destroy",
