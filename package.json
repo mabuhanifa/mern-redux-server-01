@@ -8,8 +8,8 @@
     "node": "16.11"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "start-dev": "nodemon server/index.js",
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
     "data:import": "node seeder.js",
     "data:destroy": "node seeder.js -destroy"
   },
